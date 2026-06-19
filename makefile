@@ -22,11 +22,10 @@ Binaries/kernel.o: Kernel/krnl.c
 Binaries/azulo.bin: Binaries/boot.o Binaries/kernel.o Linker/linker.ld
 	$(LD) -T Linker/linker.ld -o $@ -nostdlib Binaries/boot.o Binaries/kernel.o
 
-# monta estrutura e cria iso c/ grub
+# monta estrutura e cria iso com grub
 azulo.iso: Binaries/azulo.bin
-	mkdir -p Iso/boot/grub
-	cp Binaries/azulo.bin Iso/boot/azulo.bin
-	cp Iso/Boot/Grub/grub.cfg Iso/boot/grub/grub.cfg
+	mkdir -p Iso/Boot/Grub
+	cp Binaries/azulo.bin Iso/Boot/azulo.bin
 	grub-mkrescue -o azulo.iso Iso
 
 # so rodar no qemu
